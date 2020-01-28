@@ -38,11 +38,11 @@ const postUser = (request, response) => {
 
       throw error;
     }
-    let resp = new res('OK', 'INSERT', `SE CREO EL USUARIO ${email}`);
-    console.log(results);
-    console.log(results.fields);
+    let resp = new res.resp('OK', 'INSERT', `SE CREO EL USUARIO ${email}`);
+    // console.log(results);
+    // console.log(results.fields);
     // console.log("json",response.json(results));
-    response.status(201).send(`User added with ID: ${response.json(resp)}`)
+    response.status(201).send(resp)
   })
 }
 
