@@ -1,3 +1,4 @@
+const res = require ('./models/respuesta')
 const Pool = require('pg').Pool
 const pool = new Pool({
   user: 'eduard',
@@ -6,6 +7,7 @@ const pool = new Pool({
   password: '2614eduard',
   port: 5432,
 })
+
 
 const getUsers = (request, response) => {
   pool.query('SELECT * FROM public."Users" ORDER BY id_user ASC', (error, results) => {
@@ -27,14 +29,20 @@ const getUserById = (request, response) => {
   })
 }
 
-const createUser = (request, response) => {
-  const { name, email } = request.body
-
-  pool.query('INSERT INTO users (name, email) VALUES ($1, $2)', [name, email], (error, results) => {
+const postUser = (request, response) => {
+  console.log(request.body);
+  const { nombres, apellidos, email, contrasenia } = request.body
+  pool.query('INSERT INTO public."Users"(nombres, apellidos, email, contrasena)	VALUES ($1, $2, $3, $4)',
+  [nombres, apellidos, email, contrasenia], (error, results) => {
     if (error) {
-      throw error
+
+      throw error;
     }
-    response.status(201).send(`User added with ID: ${result.insertId}`)
+    let resp = new res('OK', 'INSERT', `SE CREO EL USUARIO ${email}`);
+    console.log(results);
+    console.log(results.fields);
+    // console.log("json",response.json(results));
+    response.status(201).send(`User added with ID: ${response.json(resp)}`)
   })
 }
 
@@ -67,8 +75,8 @@ const deleteUser = (request, response) => {
 
 module.exports = {
   getUsers,
+  postUser, //createUser
   getUserById,
-  createUser,
   updateUser,
   deleteUser,
 }

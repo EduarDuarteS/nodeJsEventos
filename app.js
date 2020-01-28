@@ -3,7 +3,7 @@ const express = require('express')
 const bodyParser = require('body-parser')
 const db = require ('./queries')
 const app = express()
-const port = 3000
+const port = 80
 
 app.use(bodyParser.json())
 app.use(
@@ -19,8 +19,7 @@ app.get('/', (request, response) => {
 })
 
 app.get('/users', db.getUsers)
-
-
+app.post('/user', db.postUser)
 
 
 
