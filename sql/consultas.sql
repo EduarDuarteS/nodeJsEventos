@@ -15,18 +15,23 @@ INSERT INTO public.categorias( nombre) VALUES ( 'Curso');
 
 INSERT INTO public.eventos(
 	 id_user, nombre, lugar, direccion, date_inicio, date_fin, tipo_evento, id_categoria)
-	VALUES (3, 'CONFERENCIA NODEJS', 'COLFERIAS', 'CARRERA 33', '2020/01/30', '2020/02/15', 'presencial', 2);
+	VALUES (26, 'CONFERENCIA NODEJS', 'COLFERIAS', 'CARRERA 33', '2020/01/30', '2020/02/15', 'presencial', 2);
 
 INSERT INTO public.eventos(
 	 id_user, nombre, lugar, direccion, date_inicio, date_fin, tipo_evento, id_categoria)
-	VALUES (3, 'CONFERENCIA NODEJS', 'COLFERIAS', 'CARRERA 33', '2020/01/30', '2020/02/15', 'presencial', 2);
+	VALUES (27, 'CONFERENCIA Angular', 'COLFERIAS', 'En linea', '2020/02/07', '2020/02/20', 'virtual', 2);
+
+INSERT INTO public.eventos(
+	 id_user, nombre, lugar, direccion, date_inicio, date_fin, tipo_evento, id_categoria)
+	VALUES (27, 'CONFERENCIA Angular', 'COLFERIAS', 'Calle 100', '2020/02/07', '2020/02/20', 'presencial', 2);
 
 -- consultas
 
 Select * from public."Users";
 Select * from public."categorias";
 Select * from public."eventos"; 
-
+SELECT * FROM public."Users" WHERE email = 'CARLOS@hotmail.com' AND contrasena = 'contrasena';
+Select * from public."eventos" WHERE id_user = 27 order by created_at asc;
 
 --DELETES
 

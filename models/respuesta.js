@@ -5,10 +5,10 @@
 //   this.descripcion = descripcion;
 // }
 
-const resp = function (estado, accion, descripcion) {
+const resp = function (estado, accion, data) {
   this.estado = estado;
   this.accion = accion;
-  this.descripcion = descripcion;
+  this.data = data;
 }
 
 

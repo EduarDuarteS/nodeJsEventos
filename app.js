@@ -18,8 +18,21 @@ app.get('/', (request, response) => {
   response.json({ info: 'Node.js, Express, and Postgres API' })
 })
 
-app.get('/users', db.getUsers)
-app.post('/user', db.postUser)
+
+app.get('/users', db.getUsers);
+
+//Crear un USUARIO nota: no permite duplicados de correo
+app.post('/user', db.postUser);
+
+//Validar login con correo y contraseña
+app.get('/login', db.getLogin);
+
+//Crear un evento app.post('/postEvent')
+
+//Eliminar un evento app.post('/deleteEvent')
+ 
+//Actualizar un evento app.post('/putEvent')
+
 
 
 
