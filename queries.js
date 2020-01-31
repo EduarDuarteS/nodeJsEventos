@@ -1,5 +1,6 @@
+const url = require('url');
 const res = require('./models/respuesta')
-const Pool = require('pg').Pool
+const Pool = require('pg').Pool;
 const pool = new Pool({
   user: 'eduard',
   host: 'localhost',
@@ -8,6 +9,19 @@ const pool = new Pool({
   port: 5432,
 })
 
+
+const getEvents = (request, response) => {
+  let q = url.parse(request.url, true);
+  let qdata = q.query;
+  // console.log(qdata.id_user);
+  pool.query('Select * from public."eventos" WHERE id_user = $1 order by created_at asc', [qdata.id_user],(error, results) => {
+    if (error) {
+      console.log(error);
+      return;
+    }
+    response.status(200).json(results.rows)
+  })
+}
 
 const getUsers = (request, response) => {
   pool.query('SELECT * FROM public."Users" ORDER BY id_user ASC', (error, results) => {
@@ -166,6 +180,7 @@ const deleteEvent = (request, response) => {
 
 module.exports = {
   getUsers,
+  getEvents,
   postUser, //createUser
   postEvent, //creatEvent
   deleteEvent, //deleteEvent

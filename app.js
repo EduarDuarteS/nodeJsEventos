@@ -33,6 +33,9 @@ app.get('/', (request, response) => {
 
 app.get('/users', db.getUsers);
 
+// Consultar Eventos
+app.get('/events', db.getEvents);
+
 //Crear un USUARIO nota: no permite duplicados de correo
 app.post('/createUser', db.postUser);
 
