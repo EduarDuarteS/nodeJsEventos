@@ -1,16 +1,18 @@
-
 const express = require('express')
 const bodyParser = require('body-parser')
-const db = require ('./queries')
+const db = require('./queries')
 const app = express()
 const port = 8081;
 
-var cors = require ('cors');
-app.use(cors());
 
-app.use(function (req, res, next) {
+var cors = require('cors');
+app.use(cors({
+  origin: ['http://localhost:8080', 'http://127.0.0.1:8080', 'http://172.24.42.62:8080'],
+  credentials: true
+}));
 
-  res.header('Access-Control-Allow-Origin', "http://localhost:8080");
+app.use(function(req, res, next) {
+  res.header('Access-Control-Allow-Origin', "*");
   res.header('Access-Control-Allow-Headers', true);
   res.header('Access-Control-Allow-Credentials', true);
   res.header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
@@ -27,7 +29,9 @@ app.use(
 
 
 app.get('/', (request, response) => {
-  response.json({ info: 'Node.js, Express, and Postgres API' })
+  response.json({
+    info: 'Node.js, Express, and Postgres API'
+  })
 })
 
 
