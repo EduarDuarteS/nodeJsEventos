@@ -158,8 +158,10 @@ const putEvent = (request, response) => {
 }
 
 const deleteEvent = (request, response) => {
-  const id = parseInt(request.body.id);
-  const id_user = parseInt(request.body.id_user);
+  let q = url.parse(request.url, true);
+  let qdata = q.query;
+  const id = parseInt(qdata.id);
+  const id_user = parseInt(qdata.id_user);
 
   pool.query('DELETE FROM public."eventos" WHERE id = $1 and id_user = $2', [id, id_user], (error, results) => {
     if (error) {
